@@ -30,16 +30,16 @@ class CfdiUseTest extends FacturamaBaseTest
      */
     public function testCfdiUses(\stdClass $cfdiUse)
     {
-        $this->assertObjectHasAttribute('Name', $cfdiUse);
+        $this->assertObjectHasProperty('Name', $cfdiUse);
         $this->assertSame($cfdiUse->Name, CfdiUse::findByName($cfdiUse->Name)['name']);
 
-        $this->assertObjectHasAttribute('Value', $cfdiUse);
+        $this->assertObjectHasProperty('Value', $cfdiUse);
         $this->assertSame($cfdiUse->Value, CfdiUse::findByValue($cfdiUse->Value)['value']);
 
-        $this->assertObjectHasAttribute('Moral', $cfdiUse);
+        $this->assertObjectHasProperty('Moral', $cfdiUse);
         $this->assertSame($cfdiUse->Moral, CfdiUse::findByName($cfdiUse->Name)['moral']);
 
-        $this->assertObjectHasAttribute('Natural', $cfdiUse);
+        $this->assertObjectHasProperty('Natural', $cfdiUse);
         $this->assertSame($cfdiUse->Natural, CfdiUse::findByName($cfdiUse->Name)['natural']);
     }
 
@@ -61,11 +61,11 @@ class CfdiUseTest extends FacturamaBaseTest
     }
 
     /**
-     * return \stdClass[]|\Generator
+     * @return \stdClass[]|\Generator
      */
-    public function getCfdiUses()
+    public static function getCfdiUses()
     {
-        $client = new Client(getenv('api_username'), getenv('api_password'));
+        $client = new Client(getenv('API_USERNAME'), getenv('API_PASSWORD'));
 
         // RFC with 12 chars length
         foreach ($client->get('catalogs/CfdiUses', ['keyword' => 'AAAA12345678']) as $cfdiUse) {

@@ -30,12 +30,12 @@ class CfdiTypeTest extends FacturamaBaseTest
      */
     public function testCfdiTypes(\stdClass $cfdiType)
     {
-        $this->assertObjectHasAttribute('Name', $cfdiType);
+        $this->assertObjectHasProperty('Name', $cfdiType);
         $this->assertSame($cfdiType->Name, CfdiType::findByName($cfdiType->Name)['name']);
 
-        $this->assertObjectHasAttribute('Value', $cfdiType);
+        $this->assertObjectHasProperty('Value', $cfdiType);
         $this->assertInstanceOf(\Generator::class, CfdiType::findByValue($cfdiType->Value));
-        $this->assertObjectHasAttribute('NameId', $cfdiType);
+        $this->assertObjectHasProperty('NameId', $cfdiType);
         $this->assertContains(['name' => $cfdiType->Name, 'nameid' => $cfdiType->NameId, 'value' => $cfdiType->Value], CfdiType::findByValue($cfdiType->Value));
     }
 
@@ -58,11 +58,11 @@ class CfdiTypeTest extends FacturamaBaseTest
     }
 
     /**
-     * return \stdClass[]|\Generator
+     * @return \stdClass[]|\Generator
      */
-    public function getCfdiTypes()
+    public static function getCfdiTypes()
     {
-        $client = new Client(getenv('api_username'), getenv('api_password'));
+        $client = new Client(getenv('API_USERNAME'), getenv('API_PASSWORD'));
 
         foreach ($client->get('catalogs/CfdiTypes') as $cfdiType) {
             yield [$cfdiType];

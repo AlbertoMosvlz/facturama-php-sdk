@@ -30,17 +30,17 @@ class FederalTaxTest extends FacturamaBaseTest
      */
     public function testFederalTaxes(\stdClass $federalTax)
     {
-        $this->assertObjectHasAttribute('Name', $federalTax);
+        $this->assertObjectHasProperty('Name', $federalTax);
         $this->assertSame($federalTax->Name, FederalTax::findByName($federalTax->Name)['name']);
 
-        $this->assertObjectHasAttribute('Value', $federalTax);
+        $this->assertObjectHasProperty('Value', $federalTax);
         $this->assertSame($federalTax->Value, FederalTax::findByValue($federalTax->Value)['value']);
     }
 
     public function testNoUnusedFederalTaxes()
     {
         $apiFederalTaxes = $this->getFederalTaxes();
-        $paymentForms = FederalTax::CATALOG_FEDERAL_TAX;
+        $federalTaxes = FederalTax::CATALOG_FEDERAL_TAX;
 
         foreach ($apiFederalTaxes as $federalTax) {
             $federalTax = reset($federalTax);
@@ -48,21 +48,21 @@ class FederalTaxTest extends FacturamaBaseTest
                 $this->fail(sprintf('Federal tax with name "%s" was not found', $federalTax->Name));
             }
 
-            unset($paymentForms[$index]);
+            unset($federalTaxes[$index]);
         }
 
-        $this->assertEmpty($paymentForms);
+        $this->assertEmpty($federalTaxes);
     }
 
     /**
-     * return \stdClass[]|\Generator
+     * @return \stdClass[]|\Generator
      */
-    public function getFederalTaxes()
+    public static function getFederalTaxes()
     {
-        $client = new Client(getenv('api_username'), getenv('api_password'));
+        $client = new Client(getenv('API_USERNAME'), getenv('API_PASSWORD'));
 
-        foreach ($client->get('catalogs/FederalTaxes') as $paymentForm) {
-            yield [$paymentForm];
+        foreach ($client->get('catalogs/FederalTaxes') as $federalTax) {
+            yield [$federalTax];
         }
     }
 }

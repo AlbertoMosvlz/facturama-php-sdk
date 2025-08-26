@@ -30,10 +30,10 @@ class PaymentMethodTest extends FacturamaBaseTest
      */
     public function testPaymentMethods(\stdClass $paymentMethod)
     {
-        $this->assertObjectHasAttribute('Name', $paymentMethod);
+        $this->assertObjectHasProperty('Name', $paymentMethod);
         $this->assertSame($paymentMethod->Name, PaymentMethod::findByName($paymentMethod->Name)['name']);
 
-        $this->assertObjectHasAttribute('Value', $paymentMethod);
+        $this->assertObjectHasProperty('Value', $paymentMethod);
         $this->assertSame($paymentMethod->Value, PaymentMethod::findByValue($paymentMethod->Value)['value']);
     }
 
@@ -55,11 +55,11 @@ class PaymentMethodTest extends FacturamaBaseTest
     }
 
     /**
-     * return \stdClass[]|\Generator
+     * @return \stdClass[]|\Generator
      */
-    public function getPaymentMethods()
+    public static function getPaymentMethods()
     {
-        $client = new Client(getenv('api_username'), getenv('api_password'));
+        $client = new Client(getenv('API_USERNAME'), getenv('API_PASSWORD'));
 
         foreach ($client->get('catalogs/PaymentMethods') as $paymentMethod) {
             yield [$paymentMethod];

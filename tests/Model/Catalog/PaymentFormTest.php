@@ -30,10 +30,10 @@ class PaymentFormTest extends FacturamaBaseTest
      */
     public function testPaymentForms(\stdClass $paymentForm)
     {
-        $this->assertObjectHasAttribute('Name', $paymentForm);
+        $this->assertObjectHasProperty('Name', $paymentForm);
         $this->assertSame($paymentForm->Name, PaymentForm::findByName($paymentForm->Name)['name']);
 
-        $this->assertObjectHasAttribute('Value', $paymentForm);
+        $this->assertObjectHasProperty('Value', $paymentForm);
         $this->assertSame($paymentForm->Value, PaymentForm::findByValue($paymentForm->Value)['value']);
     }
 
@@ -55,11 +55,11 @@ class PaymentFormTest extends FacturamaBaseTest
     }
 
     /**
-     * return \stdClass[]|\Generator
+     * @return \stdClass[]|\Generator
      */
-    public function getPaymentForms()
+    public static function getPaymentForms()
     {
-        $client = new Client(getenv('api_username'), getenv('api_password'));
+        $client = new Client(getenv('API_USERNAME'), getenv('API_PASSWORD'));
 
         foreach ($client->get('catalogs/PaymentForms') as $paymentForm) {
             yield [$paymentForm];

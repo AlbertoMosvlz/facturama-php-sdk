@@ -1,7 +1,12 @@
 {
     "name": "facturama/facturama-php-sdk",
     "description": "Facturama PHP SDK",
-    "keywords": ["API", "PHP", "JSON", "Facturama"],
+    "keywords": [
+        "API",
+        "PHP",
+        "JSON",
+        "Facturama"
+    ],
     "license": "MIT",
     "type": "library",
     "homepage": "https://www.api.facturama.com.mx/",
@@ -15,24 +20,33 @@
         }
     ],
     "require": {
-        "php": "^5.6|>=7.2|8.0",
+        "php": ">=7.4 <9.0",
         "ext-curl": "*",
         "ext-openssl": "*",
-        "guzzlehttp/guzzle": "*"
+        "guzzlehttp/guzzle": "^7.8.2"
+    },
+    "conflict": {
+        "guzzlehttp/guzzle": "<7.8.2"
     },
     "require-dev": {
-        "friendsofphp/php-cs-fixer": "^2.0",
-        "phpunit/phpunit": "^5.4.3|^6.0|^7.0",
-        "phpmd/phpmd": "^2.4.3"
+        "friendsofphp/php-cs-fixer": "^3.0",
+        "phpunit/phpunit": "^11.0",
+        "phpmd/phpmd": "^2.15"
     },
     "autoload": {
         "psr-4": {
-            "Facturama\\": ["src/"]
+            "Facturama\\": [
+                "src/"
+            ]
         }
     },
     "autoload-dev": {
-        "psr-4": { "Facturama\\Tests\\": "tests/" },
-        "files": [ "examples/credentials.php" ]
+        "psr-4": {
+            "Facturama\\Tests\\": "tests/"
+        },
+        "files": [
+            "examples/credentials.php"
+        ]
     },
     "config": {
         "sort-packages": true
