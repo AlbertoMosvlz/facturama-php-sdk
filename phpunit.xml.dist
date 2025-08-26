@@ -9,8 +9,8 @@
     
     <php>
         <ini name="error_reporting" value="-1" />
-        <env name="API_USERNAME" value="cenycauniversidad" />
-        <env name="API_PASSWORD" value="OJyJieGAtbLhD6" />
+        <env name="API_USERNAME" value="pruebas" />
+        <env name="API_PASSWORD" value="pruebas2011" />
     </php>
 
     <testsuites>
