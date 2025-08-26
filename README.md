@@ -21,7 +21,7 @@
 
 ### Dependencias
 
-Esta librería requiere PHP 5.5 como mínimo
+Esta librería requiere PHP 7.4 como mínimo
 
 ### Instalación
 
